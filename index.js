@@ -1,9 +1,18 @@
-import express from 'express'
-import bodyparser from 'bodyparser'
+import express from 'express';
+import bodyParser from 'body-parser';
+import userRourter from './router/users.js';  // FIXED
 
-const app =express();
-const port = 5000
+const app = express();
+const port = 3000;
 
-app.use(bodyparser.json())
+app.use(bodyParser.json());
+app.use('/users', userRourter);
 
-app.listen(port, () => console.log(`server running on port : http://localhost:${port}`));                
+app.get('/', (req, res) => {
+    console.log('[GET ROUTE]');
+    res.send('Hello World!');
+});
+
+app.listen(port, () => 
+  console.log(`server running on port : http://localhost:${port}`)
+);
